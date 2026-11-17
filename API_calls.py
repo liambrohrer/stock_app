@@ -1,42 +1,46 @@
 import requests
 import pandas as pd
+import time
+import os
 
-response = requests.get(
-    "https://www.alphavantage.co/query",
-    params={
-        "function": "TIME_SERIES_DAILY",
-        "symbol": "IBM",
-        "outputsize": "compact",
-        "apikey": "YOUR_KEY",
-    },
-    timeout=30,
-)
-response.raise_for_status()
-data = response.json()
+API_KEY = os.environ["ALPHA_VANTAGE_API_KEY"]
+symbols = ["AAPL", "MSFT", "NVDA"]
 
-# The time series is stored under a label such as "Time Series (Daily)".
-series_name = next(
-    (key for key in data if key.startswith("Time Series")),
-    None,
-)
+for symbol in symbols:
+    response = requests.get(
+        "https://www.alphavantage.co/query",
+        params={
+            "function": "TIME_SERIES_DAILY",
+            "symbol": symbol,
+            "outputsize": "compact",
+            "apikey": API_KEY,
+        },
+        timeout=30,
+    )
+    response.raise_for_status()
+    data = response.json()
+    time.sleep(6)  # Sleep for 6 seconds to respect API rate limits
 
-if series_name is None:
-    raise ValueError(f"API did not return time-series data: {data}")
+    series_name = next(
+        (key for key in data if key.startswith("Time Series")),
+        None,
+    )
 
-# Turn the nested JSON into rows, then make dates and prices usable.
-df = pd.DataFrame.from_dict(data[series_name], orient="index")
-df.index.name = "date"
-df = df.rename(columns={
-    "1. open": "open",
-    "2. high": "high",
-    "3. low": "low",
-    "4. close": "close",
-    "5. volume": "volume",
-})
+    if series_name is None:
+        print(f"No time-series data for {symbol}: {data}")
+        continue
 
-# API values arrive as text; convert prices and volume to numbers.
-df = df.astype(float)
-df = df.sort_index()
+    df = pd.DataFrame.from_dict(data[series_name], orient="index")
+    df.index.name = "date"
+    df = df.rename(columns={
+        "1. open": "open",
+        "2. high": "high",
+        "3. low": "low",
+        "4. close": "close",
+        "5. volume": "volume",
+    })
+    df = df.astype(float).sort_index()
 
-df.to_csv("/Users/liamrohrer/Documents/Education/Personal_Projects/stock_app/IBM_daily_prices.csv")
-print(df.head())
+    filename = f"{symbol}_daily_prices.csv"
+    df.to_csv(filename)
+    print(f"Saved {filename}")
