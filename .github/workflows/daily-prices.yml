@@ -28,7 +28,7 @@ jobs:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
         run: |
           python API_calls.py
-          python display_latest.py
+          python results.py
 
       - name: Commit updated JSON
         run: |
