@@ -12,7 +12,7 @@ for symbol in symbols:
         params={
             "function": "TIME_SERIES_DAILY",
             "symbol": symbol,
-            "outputsize": "compact",
+            "outputsize": "full",
             "apikey": API_KEY,
         },
         timeout=30,
@@ -40,6 +40,7 @@ for symbol in symbols:
         "5. volume": "volume",
     })
     df = df.astype(float).sort_index()
+    df = df.tail(365)
 
     filename = f"{symbol}_daily_prices.csv"
     df.to_csv(filename)
