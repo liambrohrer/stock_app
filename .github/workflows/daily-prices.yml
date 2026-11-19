@@ -2,7 +2,7 @@ name: Get daily stock prices
 
 on:
   schedule:
-    - cron: "10 18 * * *"
+    - cron: "25 18 * * *"
   workflow_dispatch:
 
 jobs:
