@@ -40,7 +40,7 @@ for symbol in symbols:
         "5. volume": "volume",
     })
     df = df.astype(float).sort_index()
-    df = df.tail(365)
+    #df = df.tail(365)
 
     filename = f"{symbol}_daily_prices.csv"
     df.to_csv(filename)
