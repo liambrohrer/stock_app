@@ -28,17 +28,12 @@ jobs:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
         run: |
           python API_calls.py
-          find . -maxdepth 2 -type f \( -name '*_daily_prices.csv' -o -name 'latest_stock_data.json' \) -print
           python results.py
-          find . -maxdepth 2 -type f -name 'latest_stock_data.json' -print
-          cat latest_stock_data.json
-          git status --short
 
       - name: Commit updated JSON
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add latest_stock_data.json
           git add latest_stock_data.json *_daily_prices.csv
           git diff --cached --quiet || (
             git commit -m "Update latest stock data"
