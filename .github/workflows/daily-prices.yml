@@ -28,7 +28,9 @@ jobs:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
         run: |
           python API_calls.py
+          find . -maxdepth 2 -type f \( -name '*_daily_prices.csv' -o -name 'latest_stock_data.json' \) -print
           python results.py
+          find . -maxdepth 2 -type f -name 'latest_stock_data.json' -print
 
       - name: Commit updated JSON
         run: |
