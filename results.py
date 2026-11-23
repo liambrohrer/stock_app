@@ -1,5 +1,3 @@
-"""Display the most recent observation from each *_daily_prices.csv file."""
-
 from pathlib import Path
 import json
 
