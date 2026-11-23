@@ -31,6 +31,8 @@ jobs:
           find . -maxdepth 2 -type f \( -name '*_daily_prices.csv' -o -name 'latest_stock_data.json' \) -print
           python results.py
           find . -maxdepth 2 -type f -name 'latest_stock_data.json' -print
+          cat latest_stock_data.json
+          git status --short
 
       - name: Commit updated JSON
         run: |
