@@ -12,7 +12,7 @@ for symbol in symbols:
         params={
             "function": "TIME_SERIES_DAILY",
             "symbol": symbol,
-            "outputsize": "compact",
+            "outputsize": "full",
             "apikey": API_KEY,
         },
         timeout=30,
