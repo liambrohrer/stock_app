@@ -2,31 +2,31 @@
   {
     "Stock": "Apple",
     "Symbol": "AAPL",
-    "Date": "2026-11-20",
-    "open": 352.865,
-    "high": 354.34,
-    "low": 340.56,
-    "close": 342.56,
-    "volume": 80692545
+    "Date": "2026-11-23",
+    "open": 347.87,
+    "high": 352.6,
+    "low": 345.4422,
+    "close": 349.08,
+    "volume": 56934410
   },
   {
     "Stock": "Microsoft",
     "Symbol": "MSFT",
-    "Date": "2026-11-20",
-    "open": 493.74,
-    "high": 503.8,
-    "low": 481.03,
-    "close": 484.52,
-    "volume": 47200018
+    "Date": "2026-11-23",
+    "open": 506.055,
+    "high": 509.15,
+    "low": 492.02,
+    "close": 492.5,
+    "volume": 30049666
   },
   {
     "Stock": "NVIDIA",
     "Symbol": "NVDA",
-    "Date": "2026-11-20",
-    "open": 143.52,
-    "high": 143.725,
-    "low": 124.5,
-    "close": 125.53,
-    "volume": 633418432
+    "Date": "2026-11-23",
+    "open": 167.035,
+    "high": 171.5,
+    "low": 156.93,
+    "close": 165.05,
+    "volume": 782593289
   }
 ]
